@@ -36,11 +36,7 @@ import json
 import glob as glob
 from itertools import repeat
 
-'''
-def evalOneMax(individual):
-    x = sum(individual)
-    return x,
-'''
+
 def initIndividual(icls, content):
     return icls(content)
 
@@ -50,7 +46,6 @@ def initPopulation(pcls, ind_init, filename):
     for genome in df.values:
         contents.append(list(genome))
     return pcls(ind_init(c) for c in contents)
-
 
 def evaluation(population, optimum):
 

@@ -88,3 +88,21 @@ def age_check(playing, pops):
     the 'playing' dataframe"""
     raise NotImplementedError()
     return ages
+
+
+def symmetry(playing, pops):
+    '''
+    symmetry against what is currently playing
+    could be implemented using the modulo operator
+    '''
+    raise NotImplementedError()
+    return symmetry
+
+def proportion(playing, pops):
+    '''
+    proportion of specific subset (i.e. order) to what is currently playing.
+    could also be seen as symmetry of this proportion
+
+    '''
+    raise NotImplementedError()
+    return proportion

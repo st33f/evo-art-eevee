@@ -10,10 +10,10 @@ import os
 base_dir = os.getcwd() + '/'
 
 # instruments
-synths = ['mod_beep', 'mod_pulse', 'mod_sine', 'growl']
+#synths = ['mod_beep', 'mod_pulse', 'mod_sine', 'growl']
 #synths = ['hollow', 'dark_ambience', 'dull_bell', 'sine']
 #synths = ['sine', 'sine', 'sine', 'sine']
-#synths = ['piano', 'piano', 'piano', 'piano']
+synths = ['piano', 'piano', 'piano', 'piano']
 # synths = ['tech_saws', 'tech_saws', 'tech_saws', 'tech_saws']
 
 # high_percs = ['drum_cymbal_pedal', 'drum_cymbal_closed', 'drum_tom_hi_soft', 'perc_bell', 'ambi_choir', 'tabla_tun1', 'tabla_tun3', 'tabla_tas3']
