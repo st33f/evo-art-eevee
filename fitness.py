@@ -106,3 +106,6 @@ def proportion(playing, pops):
     '''
     raise NotImplementedError()
     return proportion
+
+
+
