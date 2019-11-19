@@ -1,0 +1,46 @@
+<application>
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="26e64b5b-9fae-4ed1-b203-ff81694bc0a6" name="Stefan@192.168.178.18:22" url="http:///">
+        <fileTransfer host="192.168.178.18" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="26e64b5b-9fae-4ed1-b203-ff81694bc0a6" name="Stefan@192.168.178.18:22 (1)" url="http:///">
+        <fileTransfer host="192.168.178.18" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="78c48b1b-064f-49af-b557-95f7f3d79670" name="Stefan@192.168.178.18:22 (2)" url="http:///">
+        <fileTransfer host="192.168.178.18" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="78c48b1b-064f-49af-b557-95f7f3d79670" name="Stefan@192.168.178.18:22 (3)" url="http:///">
+        <fileTransfer host="192.168.178.18" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="78c48b1b-064f-49af-b557-95f7f3d79670" name="Stefan@192.168.178.18:22 (4)" url="http:///">
+        <fileTransfer host="192.168.178.18" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="78c48b1b-064f-49af-b557-95f7f3d79670" name="Stefan@192.168.178.18:22 (5)" url="http:///">
+        <fileTransfer host="192.168.178.18" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="78c48b1b-064f-49af-b557-95f7f3d79670" name="Stefan@192.168.178.18:22 (6)" url="http:///">
+        <fileTransfer host="192.168.178.18" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="78c48b1b-064f-49af-b557-95f7f3d79670" name="Stefan@192.168.178.18:22 (7)" url="http:///">
+        <fileTransfer host="192.168.178.18" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</application>
