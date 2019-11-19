@@ -141,6 +141,6 @@ def create_preset_from_config_file(config_dict, name):
 
 
 
-#config = {"mut_rate": [1, 1, 1, 1], "pop_size": 20, "gen_length": 8, "bpm_base": 15, "refresh_rate": 8, "instr_count": [0, 0, 0, 4]}
+#config ={"mut_rate": [0.5, 0.5, 0.5, 0.5], "pop_size": 100, "gen_length": 1, "bpm_base": 10, "refresh_rate": 8, "instr_count": [1, 1, 1, 1]}
 #print(config)
-#create_preset_from_config_file(config, "all_synths")
+#create_preset_from_config_file(config, "default_100")

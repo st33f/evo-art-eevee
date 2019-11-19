@@ -1,1 +1,1 @@
-{"mut_rate": [1, 1, 1, 1], "pop_size": 20, "gen_length": 8, "bpm_base": 15, "refresh_rate": 8, "instr_count": [0, 0, 0, 4]}
+{"mut_rate": [1, 1, 1, 1], "pop_size": 20, "gen_length": 1, "bpm_base": 15, "refresh_rate": 8, "instr_count": [0, 0, 0, 4]}

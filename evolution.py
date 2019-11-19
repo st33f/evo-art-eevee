@@ -51,31 +51,26 @@ def initPopulation(pcls, ind_init, filename):
         contents.append(list(genome))
     return pcls(ind_init(c) for c in contents)
 
-def df_to_phenes(df, col_names):
-    df = df.apply(make_phenotype, axis=1).tolist()
-    return pd.DataFrame(df, columns=col_names)
-
 
 def evaluation(population, optimum):
 
     # subset of cols to evaluate
     # calc distance based on subset
     # then score every individual in pop
-    subset = ['blue']
+    subset = ['order']
 
     opt = optimum.loc[:,subset].values
     pop = population.loc[:,subset].values
+    print(opt)
 
+    #opt = [[3]]
     fitnesses = map(toolbox.evaluate, pop, repeat(opt))
     #print(list(fitnesses))
     return fitnesses
 
 
-
-
-
 # DEAP stuff
-creator.create("FitnessMax", base.Fitness, weights=(0.00,))
+creator.create("FitnessMax", base.Fitness, weights=(1.00,))
 creator.create("Individual", list, fitness=creator.FitnessMax)
 
 toolbox = base.Toolbox()
@@ -85,9 +80,11 @@ toolbox.register("population", initPopulation, list, toolbox.individual)
 
 toolbox.register("evaluate", distance)
 toolbox.register("mate", tools.cxTwoPoint)
-toolbox.register("mutate", tools.mutPolynomialBounded, eta=.5, low=0., up=1., indpb=0.6)
+toolbox.register("mutate", tools.mutPolynomialBounded, eta=.9, low=0., up=1., indpb=0.9)
 #toolbox.register("mutate", tools.mutGaussian, mu=0.5, sigma=0.1, indpb=0.05)
-toolbox.register("select", tools.selNSGA2)
+#toolbox.register("select", tools.selNSGA2)
+toolbox.register("select", tools.selWorst)
+
 
 
 def main():
@@ -99,16 +96,12 @@ def main():
     phen_cols = [x for x in load_genepool(playing_path).columns]# if x not in ['nature', 'pitch']]
     gen_cols = [x for x in load_genepool(playing_path).columns if x not in ['nature', 'pitch']]
 
-    #col_names = col_names.append(['nature', 'pitch'])
-
     # Initializing the populations
     files = glob.glob(preset_path + 'current/*.csv')
     try:
         files.remove(f'{preset_path}current/playing.csv')
     except:
         pass
-
-    #toolbox.register("population", initPopulation, list, toolbox.individual)
 
     pops = [toolbox.population(file) for file in files]
 
@@ -125,8 +118,11 @@ def main():
 
         print("-- Generation %i --" % g)
 
-        for pop in pops:
-            i = pops.index(pop)
+        # if pop == ...: # using an if statement, different rules can be programmed for different instruments
+        # Optimum is the mean of the phenotype
+        optimum = compute_optimum(load_genepool(f'{preset_path}current/playing.csv'), phen_cols)
+
+        for i, pop in enumerate(pops):
 
             # Select the next generation individuals
             offspring = toolbox.select(pop, len(pop))
@@ -139,9 +135,8 @@ def main():
                     toolbox.mutate(mutant)
                     del mutant.fitness.values
 
-            # fitness assignment for each population // messy, but works...
+            # fitness assignment for each population // reworked
             offspring_fit = pd.DataFrame(offspring, columns=gen_cols)
-            #offspring_fit = df_to_phenes(offspring_fit, col_names)
             offspring_dict = offspring_fit.to_dict(orient="records")
 
             pop_offspring = []
@@ -151,23 +146,7 @@ def main():
 
             pop_phenotypes = pd.DataFrame(pop_offspring, columns=phen_cols)
 
-            #offspring_fit.loc[:, ['pitch', 'nature']] = 0
-
-            # if pop == ...: # using an if statement, different rules can be programmed for different instruments
-            # Optimum is the mean of the phenotype
-            optimum = compute_optimum(load_genepool(f'{preset_path}current/playing.csv'), phen_cols)
-            #print(optimum) # has 22
-            #print(len(optimum))
-            #print(len(col_names))
-
-            #df_optimum = pd.DataFrame(optimum.tolist(), columns=phen_cols)
-            #print(df_optimum)
-            #print(len(offspring[0]))
-
             fitnesses = evaluation(pop_phenotypes, optimum)
-
-            #fitnesses = map(toolbox.evaluate, pop_phenotypes.iterrows(), repeat(optimum))
-
 
             # for some stupid reason, not printing here will mean the code doesn't work (WTF? python 3 issue i think)
             print(list(zip(offspring, fitnesses)))
@@ -184,14 +163,12 @@ def main():
             # selection for next_play using NSGA2
             best_genes = toolbox.select(pop, preset_config['instr_count'][i])
             best_genes = pd.DataFrame(best_genes, columns=gen_cols)
-            #best_genes['nature'] = files[i].split('/')[-1].replace('.csv', '')
 
             # convert next play to phenotype and save as play.csv
             best_phenotypes = gen2phen(best_genes, phen_cols, i)
             next_play = pd.concat([next_play, best_phenotypes])
 
         # not the prettiest code but it works. Maps playing genes back to a pd.df of phenes
-        #next_play = df_to_phenes(next_play, phen_cols)
         next_play.to_csv(f'{preset_path}current/playing.csv')
 
         # updating configs
